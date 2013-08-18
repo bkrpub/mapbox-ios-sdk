@@ -110,12 +110,13 @@
                                    [NSNumber numberWithUnsignedInt:x], 
                                    [NSNumber numberWithUnsignedInt:y]];
 
+	NSData *data = nil;
+
         if ([db hadError])
-            image = [RMTileImage errorTile];
-
-        [results next];
-
-        NSData *data = [results dataForColumn:@"tile_data"];
+	  image = [RMTileImage errorTile];
+        else 
+	  if( [results next] ) 
+	      data = [results dataForColumnIndex: 0];
 
         if ( ! data)
             image = [RMTileImage errorTile];
