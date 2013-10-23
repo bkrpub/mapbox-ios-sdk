@@ -28,6 +28,7 @@
 
 #import "RMQuadTree.h"
 #import "RMAnnotation.h"
+#import "RMMarker.h"
 #import "RMProjection.h"
 #import "RMMapView.h"
 
@@ -521,6 +522,14 @@
                                                                      coordinate:clusterMarkerCoordinate
                                                                        andTitle:[NSString stringWithFormat:@"%d", enclosedAnnotationsCount]];
                 _cachedClusterAnnotation.isClusterAnnotation = YES;
+
+                RMMarker *marker = [[RMMarker alloc] initWithMapBoxMarkerImage:nil tintColor: [UIColor blueColor]];
+                UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0,0,20,20)];
+                label.text = _cachedClusterAnnotation.title;
+                marker.label = label;
+                _cachedClusterAnnotation.layer = marker;
+
+                
                 _cachedClusterAnnotation.userInfo = self;
 
                 _cachedClusterEnclosedAnnotations = [[NSArray alloc] initWithArray:enclosedAnnotations];

@@ -42,10 +42,11 @@
 
 - (NSURL *)URLForTile:(RMTile)tile
 {
+#if 0
 	NSAssert4(((tile.zoom >= self.minZoom) && (tile.zoom <= self.maxZoom)),
 			  @"%@ tried to retrieve tile with zoomLevel %d, outside source's defined range %f to %f", 
 			  self, tile.zoom, self.minZoom, self.maxZoom);
-
+#endif
 	return [NSURL URLWithString:[NSString stringWithFormat:@"http://tile.opencyclemap.org/cycle/%d/%d/%d.png", tile.zoom, tile.x, tile.y]];
 }
 

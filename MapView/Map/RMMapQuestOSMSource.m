@@ -42,7 +42,11 @@
 
 - (NSURL *)URLForTile:(RMTile)tile
 {
-	NSAssert4(((tile.zoom >= self.minZoom) && (tile.zoom <= self.maxZoom)),
+    if( ! ( (tile.zoom >= self.minZoom) && (tile.zoom <= self.maxZoom) ) ) {
+        NSLog(@"tile.zoom: %d min: %f max: %f", tile.zoom, self.minZoom, self.maxZoom);
+        return [NSURL URLWithString: @"dummy"];
+    }
+        NSAssert4(((tile.zoom >= self.minZoom) && (tile.zoom <= self.maxZoom)),
 			  @"%@ tried to retrieve tile with zoomLevel %d, outside source's defined range %f to %f", 
 			  self, tile.zoom, self.minZoom, self.maxZoom);
 
